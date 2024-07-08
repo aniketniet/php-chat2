@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PHP WebSocket Chat</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      #chat {
+        border: 1px solid #ccc;
+        padding: 10px;
+        height: 300px;
+        overflow-y: scroll;
+      }
+      #message {
+        width: 100%;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="chat"></div>
+    <input type="text" id="message" placeholder="Type a message..." />
+    <button id="send">Send</button>
+
+    <script>
+      let socket = new WebSocket("ws://127.0.0.1:8080");
+
+      socket.onopen = function () {
+        document.getElementById("chat").innerHTML +=
+          "<p>Connected to server</p>";
+      };
+
+      socket.onmessage = function (event) {
+        document.getElementById("chat").innerHTML +=
+          "<p>" + event.data + "</p>";
+      };
+
+      socket.onclose = function () {
+        document.getElementById("chat").innerHTML +=
+          "<p>Disconnected from server</p>";
+      };
+
+      socket.onerror = function (error) {
+        document.getElementById("chat").innerHTML +=
+          "<p>Error: " + error.message + "</p>";
+      };
+
+      document.getElementById("send").onclick = function () {
+        const message = document.getElementById("message").value;
+        socket.send(message);
+        document.getElementById("message").value = "";
+      };
+    </script>
+  </body>
+</html>
