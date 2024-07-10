@@ -33,9 +33,9 @@
       // const socketUrl = `${protocol}//${wsHost}:${wsPort}`;
 
       // Initialize WebSocket
+      //const socket = new WebSocket(socketUrl);
 
       let socket = new WebSocket("wss://103.189.173.28:3000 ");
-      //const socket = new WebSocket(socketUrl);
 
       socket.onopen = function () {
         document.getElementById("chat").innerHTML +=
