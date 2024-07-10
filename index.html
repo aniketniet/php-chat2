@@ -26,7 +26,16 @@
     <button id="send">Send</button>
 
     <script>
-      let socket = new WebSocket("ws://127.0.0.1:8080");
+      // const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
+
+      // const wsHost = window.location.hostname;
+      // const wsPort = 3000;
+      // const socketUrl = `${protocol}//${wsHost}:${wsPort}`;
+
+      // Initialize WebSocket
+
+      let socket = new WebSocket("ws://103.189.173.28:3000 ");
+      //const socket = new WebSocket(socketUrl);
 
       socket.onopen = function () {
         document.getElementById("chat").innerHTML +=
@@ -47,7 +56,6 @@
         document.getElementById("chat").innerHTML +=
           "<p>Error: " + error.message + "</p>";
       };
-
       document.getElementById("send").onclick = function () {
         const message = document.getElementById("message").value;
         socket.send(message);
