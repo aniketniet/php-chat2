@@ -48,10 +48,10 @@ $server = \Ratchet\Server\IoServer::factory(
             new Chat()
         )
     ),
-    4000
+    3000
 );
 
-echo "Server started at port 4000\n";
+echo "Server started at port 3000\n";
 
 $server->run();
 
